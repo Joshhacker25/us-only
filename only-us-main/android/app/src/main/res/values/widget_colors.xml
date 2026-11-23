@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Love widget colors — Only Us Midnight Purple palette. -->
+<resources>
+    <color name="widget_bg">#100B1F</color>
+    <color name="widget_card">#1B1230</color>
+    <color name="widget_purple">#7C3AED</color>
+    <color name="widget_pink">#FF4D9D</color>
+    <color name="widget_lavender">#E9D5FF</color>
+    <color name="widget_text">#FFFFFF</color>
+</resources>

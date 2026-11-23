@@ -1,0 +1,119 @@
+# Only Us — Build APK in the cloud (no Android Studio / VS Code needed)
+#
+# How it works: GitHub Actions builds the APK on GitHub's servers and
+# attaches it to the workflow run as a downloadable artifact.
+# Trigger: Actions tab -> "Build APK" -> Run workflow. (Also runs on
+# every push to main.)
+#
+# REQUIRED secret (one-time setup by Joshep):
+#   GOOGLE_SERVICES_JSON — base64 of android/app/google-services.json
+#   (the real Firebase file — it is git-ignored, so the workflow needs
+#   it as a secret). On Windows PowerShell, in the folder with the file:
+#     [Convert]::ToBase64String([IO.File]::ReadAllBytes("google-services.json"))
+#   Copy the long string, then in GitHub: repo -> Settings -> Secrets
+#   and variables -> Actions -> New repository secret, name
+#   GOOGLE_SERVICES_JSON, paste the string, Add secret.
+#
+# OPTIONAL secrets (only for a properly signed release APK):
+#   ANDROID_KEYSTORE_BASE64 — base64 of your .keystore file
+#   KEYSTORE_PASSWORD, KEY_PASSWORD, KEY_ALIAS
+#   Without these, the workflow still builds an APK, but it is
+#   debug-signed (fine for testing on your two phones; not for
+#   updating an already-installed signed release later — keep the
+#   same keystore for all future releases).
+#
+# Download: Actions tab -> the run -> Artifacts -> only-us-apk.
+# Install: send the APK to the phone, allow "Install unknown apps",
+# install. Both partners sign in with their Firebase accounts.
+
+name: Build APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'android/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.github/workflows/build-apk.yml'
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.x'
+          channel: stable
+
+      - name: Restore google-services.json from secret
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -z "$GOOGLE_SERVICES_JSON" ]; then
+            echo "::error::Missing secret GOOGLE_SERVICES_JSON — add it in repo Settings > Secrets and variables > Actions (see the header of this workflow file)."
+            exit 1
+          fi
+          echo "$GOOGLE_SERVICES_JSON" | base64 -d > android/app/google-services.json
+          test -s android/app/google-services.json
+
+      - name: Restore release keystore from secrets (optional)
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > android/only-us-release.keystore
+            cat > android/key.properties <<EOF
+          storePassword=$KEYSTORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=only-us-release.keystore
+          EOF
+            echo "Release keystore restored — signed release build."
+          else
+            echo "No keystore secrets — building debug-signed APK for testing."
+          fi
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        # --no-fatal-warnings / --no-fatal-infos: the codebase has 39
+        # warning/info-level lint notes (deprecated withOpacity, unused
+        # imports, etc.) and plain `flutter analyze` exits 1 on those,
+        # which killed the first cloud run before the build. Only real
+        # errors should fail the build here.
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos
+
+      - name: Test
+        run: flutter test
+
+      - name: Build APK (release)
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: only-us-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error

@@ -1,0 +1,30 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+*.ipr
+*.iws
+.idea/
+.DS_Store
+
+# Android
+android/app/google-services.json
+android/key.properties
+*.keystore
+*.jks
+local.properties
+android/.gradle/
+android/app/build/
+
+# Firebase — never commit real config / secrets
+firebase/.runtimeconfig.json
+.env
+*.env
+
+# Misc
+*.log

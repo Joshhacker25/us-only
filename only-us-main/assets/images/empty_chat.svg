@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="360" viewBox="0 0 512 360">
+  <title>Empty chat — placeholder</title>
+  <!-- Chat bubble outline -->
+  <rect x="96" y="48" width="320" height="200" rx="32" fill="none" stroke="#7C3AED" stroke-width="10"/>
+  <path d="M176 248 L 176 296 L 232 248 Z" fill="none" stroke="#7C3AED" stroke-width="10" stroke-linejoin="round"/>
+  <!-- Heart inside the bubble -->
+  <path d="M256 196 C 222 168 196 146 196 120 C 196 102 210 90 226 90 C 238 90 248 97 256 106 C 264 97 274 90 286 90 C 302 90 316 102 316 120 C 316 146 290 168 256 196 Z" fill="#FF4D9D"/>
+  <!-- Dots -->
+  <circle cx="152" cy="150" r="8" fill="#E9D5FF"/>
+  <circle cx="360" cy="150" r="8" fill="#E9D5FF"/>
+  <!-- Caption -->
+  <text x="256" y="336" font-family="sans-serif" font-size="24" fill="#E9D5FF" text-anchor="middle">No messages yet — say hello</text>
+</svg>

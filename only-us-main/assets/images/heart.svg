@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Heart — placeholder</title>
+  <path d="M256 448 C 150 372 64 306 64 208 C 64 138 118 88 178 88 C 210 88 238 106 256 132 C 274 106 302 88 334 88 C 394 88 448 138 448 208 C 448 306 362 372 256 448 Z" fill="#FF4D9D"/>
+  <path d="M256 448 C 150 372 64 306 64 208 C 64 138 118 88 178 88 C 210 88 238 106 256 132 L 256 448 Z" fill="#7C3AED" opacity="0.55"/>
+</svg>

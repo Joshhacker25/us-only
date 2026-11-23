@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Medium Love widget (wide / 4 cells): nickname, days together,
+     optional sweet note and last heart. Note and last heart are hidden
+     when privacy mode is on (see LoveWidgetProvider). Tap opens the app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:background="@drawable/widget_background">
+
+    <TextView
+        android:id="@+id/widget_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Love"
+        android:textColor="@color/widget_text"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 days together 💕"
+        android:textColor="@color/widget_lavender"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/widget_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Thinking of you"
+        android:textColor="@color/widget_pink"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/widget_last_heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Last heart: —"
+        android:textColor="@color/widget_lavender"
+        android:textSize="12sp" />
+
+</LinearLayout>

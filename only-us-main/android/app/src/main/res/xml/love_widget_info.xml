@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Love widget declaration. updatePeriodMillis is 0: the widget never
+     polls. It refreshes when the Flutter side changes preferences or a
+     heart arrives (MainActivity broadcasts ACTION_UPDATE_WIDGET), when
+     added/resized, and after reboot (BOOT_COMPLETED). -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="180dp"
+    android:minHeight="110dp"
+    android:updatePeriodMillis="0"
+    android:initialLayout="@layout/widget_love_medium"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen"
+    android:previewLayout="@layout/widget_love_medium" />

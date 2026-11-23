@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Small Love widget (narrow / 2 cells): partner nickname + days together.
+     Tap opens the Only Us app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <TextView
+        android:id="@+id/widget_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Love"
+        android:textColor="@color/widget_text"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 days together 💕"
+        android:textColor="@color/widget_lavender"
+        android:textSize="13sp" />
+
+</LinearLayout>

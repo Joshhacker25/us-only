@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Only Us logo — placeholder</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#FF4D9D"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded tile -->
+  <rect x="56" y="56" width="400" height="400" rx="96" fill="url(#bg)"/>
+  <!-- Heart -->
+  <path d="M256 356 C 190 306 138 262 138 200 C 138 158 170 130 205 130 C 227 130 246 142 256 158 C 266 142 285 130 307 130 C 342 130 374 158 374 200 C 374 262 322 306 256 356 Z" fill="#FFFFFF"/>
+  <!-- Small sparkle -->
+  <path d="M392 118 l 8 20 20 8 -20 8 -8 20 -8 -20 -20 -8 20 -8 Z" fill="#E9D5FF"/>
+  <circle cx="128" cy="392" r="10" fill="#E9D5FF" opacity="0.8"/>
+</svg>
