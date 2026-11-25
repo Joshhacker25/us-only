@@ -9,7 +9,7 @@
 # flutter test 70/70). It contains no real google-services.json, so
 # Firebase features show the "not configured yet" screen until the
 # real file is supplied as the GOOGLE_SERVICES_JSON secret.
-# NOTE: the ZIP link below is a temporary file link (expires 2026-11-27 21:57 UTC).
+# NOTE: the ZIP link below is a temporary file link (expires 2026-11-27 22:07 UTC).
 # If it has expired when you re-run this workflow, re-upload the ZIP
 # and update the URL.
 #
@@ -49,7 +49,7 @@ jobs:
 
       - name: Download verified project ZIP
         run: |
-          curl -sL -o only-us.zip "https://muse.ai/files/1437332169470928/29235983846066051/9hvi29cuophk9do521jxqk6b/Only_Us_Flutter_Project_v1.3.zip"
+          curl -sL -o only-us.zip "https://muse.ai/files/1437332169470928/1693088992348470/vxmpesp13751651uf1n7lfq6/Only_Us_Flutter_Project_v1.3.zip"
           test -s only-us.zip
           unzip -o only-us.zip -d build-src
           test -f build-src/only-us/pubspec.yaml
